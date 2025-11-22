@@ -1,0 +1,44 @@
+{% extends "main/profile_base.html" %}
+{% block title %}Add New Car{% endblock %}
+
+{% block profile_content %}
+<h4>Add New Car</h4>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <input type="text" name="brand" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" name="model" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fee Per Day ($)</label>
+        <input type="number" name="fee" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="url" name="image_url" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input type="number" name="production_year" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Seats</label>
+        <input type="number" name="seats" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Car</button>
+    <a href="{% url 'my_cars' %}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+{% endblock %}

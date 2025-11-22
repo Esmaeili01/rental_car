@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/manage_admins/', views.manage_admins_view, name='manage_admins'),
 
     # Cars
-    path('car/<int:car_id>/', views.car_detail_view, name='car_detail'),
+    path('car/<int:car_id>/rent/', views.rent_car_view, name='rent_car'),
+    path('car/<int:car_id>/', views.car_view, name='car'),
     path('add_car/', views.add_car_view, name='add_car'),
 ]

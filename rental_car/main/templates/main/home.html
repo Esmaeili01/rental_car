@@ -70,7 +70,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
             <p class="card-text">${{ car.fee }} / day</p>
-            <a href="{% url 'car_detail' car.car_id %}" class="btn btn-primary">View</a>
+            <a href="{% url 'car' car.car_id %}" class="btn btn-primary">View</a>
           </div>
         </div>
       </div>
