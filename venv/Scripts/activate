@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\uni\term 7\cloud computing\rental_car\venv"
+VIRTUAL_ENV="D:\uni\term 7\cloud computing\project\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

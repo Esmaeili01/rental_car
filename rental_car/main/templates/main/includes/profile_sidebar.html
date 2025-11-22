@@ -1,0 +1,46 @@
+<div class="bg-light border-end p-3" style="width: 230px;">
+  <h5 class="mb-3">Menu</h5>
+  <ul class="nav flex-column">
+    <li class="nav-item mb-1">
+      <a href="{% url 'profile' %}" class="nav-link">
+        <i class="bi bi-person"></i> Profile
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="{% url 'rent_history' %}" class="nav-link">
+        <i class="bi bi-clock-history"></i> Rent History
+      </a>
+    </li>
+
+    {% if user.role in "owner admin superadmin" %}
+    <li class="nav-item mb-1">
+      <a href="{% url 'my_cars' %}" class="nav-link">
+        <i class="bi bi-car-front"></i> My Cars
+      </a>
+    </li>
+    {% endif %}
+
+    {% if user.role in "admin superadmin" %}
+    <hr>
+    <li class="nav-item mb-1">
+      <a href="{% url 'reports' %}" class="nav-link">
+        <i class="bi bi-flag"></i> Reports
+      </a>
+    </li>
+    <li class="nav-item mb-1">
+      <a href="{% url 'suspend' %}" class="nav-link">
+        <i class="bi bi-slash-circle"></i> Suspend
+      </a>
+    </li>
+    {% endif %}
+
+    {% if user.role == "superadmin" %}
+    <hr>
+    <li class="nav-item mt-1">
+      <a href="{% url 'manage_admins' %}" class="nav-link">
+        <i class="bi bi-gear"></i> Manage Admins
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

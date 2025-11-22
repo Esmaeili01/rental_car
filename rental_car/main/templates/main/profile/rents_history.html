@@ -1,0 +1,27 @@
+{% extends "main/profile_base.html" %}
+{% block title %}Rent History{% endblock %}
+{% block profile_content %}
+<h4>Rent History</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Car</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Total Fee</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rent in rents %}
+    <tr>
+      <td>{{ rent.car.brand }} {{ rent.car.model }}</td>
+      <td>{{ rent.start_date }}</td>
+      <td>{{ rent.end_date }}</td>
+      <td>${{ rent.total_fee }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No rent history found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

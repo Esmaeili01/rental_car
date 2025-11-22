@@ -1,0 +1,23 @@
+{% extends "main/profile_base.html" %}
+{% block title %}Profile - Car Rental{% endblock %}
+{% block profile_content %}
+<div class="card">
+  <div class="card-header bg-dark text-white">Your Profile</div>
+  <div class="card-body">
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <p><strong>Birthdate:</strong> {{ user.birthdate }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+    <p><strong>Role:</strong> {{ user.role|title }}</p>
+    <p><strong>Joined:</strong> {{ user.date_joined|date:"Y-m-d" }}</p>
+    <form method="POST" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger mt-3">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

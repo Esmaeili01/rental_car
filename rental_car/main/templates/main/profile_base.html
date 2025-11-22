@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{% block title %}Profile - Car Rental{% endblock %}
+
+{% block content %}
+<div class="d-flex" style="min-height: 80vh;">
+
+  <!-- Sidebar -->
+  {% include "main/includes/profile_sidebar.html" %}
+
+  <!-- Content area -->
+  <div class="flex-grow-1 p-4">
+    {% block profile_content %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

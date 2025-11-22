@@ -1,0 +1,84 @@
+{% extends "main/base.html" %}
+{% block title %}Home - Car Rental{% endblock %}
+
+{% block content %}
+
+<!-- Search bar -->
+<div class="row mb-3">
+  <div class="col-12">
+    <form method="GET" action="{% url 'home' %}" class="d-flex">
+      <input type="text" name="q" class="form-control me-2" placeholder="Search by brand or model" value="{{ request.GET.q }}">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Filters (left column) -->
+  <div class="col-md-3 mb-3">
+    <h5>Filters</h5>
+    <form method="GET" action="{% url 'home' %}">
+      <div class="mb-2">
+        <label class="form-label">Category</label>
+        <select class="form-select" name="category">
+          <option value="">All</option>
+          <option value="sedan">Sedan</option>
+          <option value="suv">SUV</option>
+          <option value="hatchback">Hatchback</option>
+          <option value="truck">Truck</option>
+          <option value="van">Van</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Gearbox</label>
+        <select class="form-select" name="gearbox">
+          <option value="">All</option>
+          <option value="manual">Manual</option>
+          <option value="automatic">Automatic</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Fuel</label>
+        <select class="form-select" name="fuel">
+          <option value="">All</option>
+          <option value="gasoline">Gasoline</option>
+          <option value="diesel">Diesel</option>
+          <option value="electric">Electric</option>
+          <option value="hybrid">Hybrid</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Seats</label>
+        <input type="number" name="seats" class="form-control" min="1" placeholder="Any">
+      </div>
+
+      <button class="btn btn-secondary w-100" type="submit">Apply Filters</button>
+    </form>
+  </div>
+
+  <!-- Search results / Cars (right column) -->
+  <div class="col-md-9">
+    <h2 class="mb-4">Available Cars</h2>
+    <div class="row">
+      {% for car in cars %}
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <img src="{{ car.image_url }}" class="card-img-top" alt="{{ car.brand }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+            <p class="card-text">${{ car.fee }} / day</p>
+            <a href="{% url 'car_detail' car.car_id %}" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No cars available right now.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

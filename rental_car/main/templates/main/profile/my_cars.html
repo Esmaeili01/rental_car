@@ -1,0 +1,20 @@
+{% extends "main/profile_base.html" %}
+{% block title %}My Cars{% endblock %}
+{% block profile_content %}
+<h4>My Cars</h4>
+<div class="row">
+  {% for car in my_cars %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <img src="{{ car.image_url }}" class="card-img-top" alt="{{ car.brand }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+        <p>${{ car.fee }} / day</p>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No cars added yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
