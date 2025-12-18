@@ -57,30 +57,30 @@ def logout_view(request):
     return redirect('login')
 
 def profile_view(request):
-    return render(request, 'main/profile/profile.html')
+    return render(request, 'main/account/profile.html')
 
 def rents_history_view(request):
     # Add logic later to fetch user's rent history
-    return render(request, 'main/profile/rents_history.html')
+    return render(request, 'main/account/rents_history.html')
 
 def my_cars_view(request):
     # For owners
     my_cars = Car.objects.filter(owner_id=request.user)
-    return render(request, 'main/profile/my_cars.html', {'my_cars': my_cars})
+    return render(request, 'main/account/my_cars.html', {'my_cars': my_cars})
 
 def reports_view(request):
     # For admins
-    return render(request, 'main/profile/reports.html')
+    return render(request, 'main/account/reports.html')
 
 
 def suspend_view(request):
     # For admins
-    return render(request, 'main/profile/suspend.html')
+    return render(request, 'main/account/suspend.html')
 
 def manage_admins_view(request):
     # For superadmins
     admins = User.objects.filter(role='admin')
-    return render(request, 'main/profile/manage_admins.html', {'admins': admins})
+    return render(request, 'main/account/manage_admins.html', {'admins': admins})
 
 def car_view(request, car_id):
     car = Car.objects.get(pk=car_id)
@@ -128,7 +128,7 @@ def add_car_view(request):
     else:
         form = CarForm()
 
-    return render(request, 'main/profile/add_car.html', {'form': form})
+    return render(request, 'main/account/add_car.html', {'form': form})
 
 
 def search_view(request):

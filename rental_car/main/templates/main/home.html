@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "main/includes/base.html" %}
 {% block title %}Home - Car Rental{% endblock %}
 
 {% block content %}
@@ -7,14 +7,21 @@
 <div class="row mb-3">
   <div class="col-12">
     <form method="GET" action="{% url 'home' %}" class="d-flex">
-      <input type="text" name="q" class="form-control me-2" placeholder="Search by brand or model" value="{{ request.GET.q }}">
+      <input
+        type="text"
+        name="q"
+        class="form-control me-2"
+        placeholder="Search by brand or model"
+        value="{{ request.GET.q }}"
+      >
       <button class="btn btn-primary" type="submit">Search</button>
     </form>
   </div>
 </div>
 
 <div class="row">
-  <!-- Filters (left column) -->
+
+  <!-- Filters -->
   <div class="col-md-3 mb-3">
     <h5>Filters</h5>
     <form method="GET" action="{% url 'home' %}">
@@ -52,34 +59,49 @@
 
       <div class="mb-2">
         <label class="form-label">Seats</label>
-        <input type="number" name="seats" class="form-control" min="1" placeholder="Any">
+        <input type="number" name="seats" class="form-control" min="1">
       </div>
 
-      <button class="btn btn-secondary w-100" type="submit">Apply Filters</button>
+      <button class="btn btn-secondary w-100" type="submit">
+        Apply Filters
+      </button>
     </form>
   </div>
 
-  <!-- Search results / Cars (right column) -->
+  <!-- Cars -->
   <div class="col-md-9">
     <h2 class="mb-4">Available Cars</h2>
+
     <div class="row">
       {% for car in cars %}
-        <div class="col-md-4 mb-3">
-          <a href="{% url 'car' car.car_id %}" class="btn">
-            <div class="card h-100">
-              <img src="{{ car.image_url }}" class="card-img-top" alt="{{ car.brand }}">
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-                <p class="mb-2">${{ car.fee }} / day</p>
+        <div class="col-md-4 mb-4">
+
+          <!-- Clickable card -->
+          <a href="{% url 'car' car.car_id %}" class="text-decoration-none text-dark">
+            <div class="card h-100 cars_card">
+
+              <img
+                src="{{ car.image_url }}"
+                alt="{{ car.brand }}"
+                style="height: 220px; object-fit: cover;"
+              >
+
+              <div class="card-body text-center">
+                <h5 class="card-title mb-2">
+                  {{ car.brand }} {{ car.model }}
+                </h5>
+                <p class="mb-0">${{ car.fee }} / day</p>
               </div>
+
             </div>
           </a>
+
         </div>
       {% empty %}
         <p>No cars available right now.</p>
       {% endfor %}
     </div>
   </div>
-</div>
 
+</div>
 {% endblock %}

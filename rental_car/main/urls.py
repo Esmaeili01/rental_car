@@ -13,13 +13,13 @@ urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('logout/', views.logout_view, name='logout'),
 
-    # Profile section
+    # account section
     path('profile/', views.profile_view, name='profile'),
-    path('profile/rents_history/', views.rents_history_view, name='rent_history'),
-    path('profile/my_cars/', views.my_cars_view, name='my_cars'),
-    path('profile/reports/', views.reports_view, name='reports'),
-    path('profile/suspend/', views.suspend_view, name='suspend'),
-    path('profile/manage_admins/', views.manage_admins_view, name='manage_admins'),
+    path('rents_history/', views.rents_history_view, name='rents_history'),
+    path('my_cars/', views.my_cars_view, name='my_cars'),
+    path('reports/', views.reports_view, name='reports'),
+    path('suspend/', views.suspend_view, name='suspend'),
+    path('manage_admins/', views.manage_admins_view, name='manage_admins'),
 
     # Cars
     path('car/<int:car_id>/rent/', views.rent_car_view, name='rent_car'),

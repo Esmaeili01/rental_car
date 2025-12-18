@@ -14,7 +14,13 @@
       padding: 0;
       overflow-x: hidden; /* prevents horizontal scroll */
     }
+    .cars_card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
   </style>
+
 </head>
 <body>
 <nav class="p-2 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -28,13 +34,13 @@
       <ul class="h5 navbar-nav ms-auto">
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'profile' %}">
-              <i class="bi bi-person-circle"></i> Profile
+            <a class="nav-link" href="{% url 'rents_history' %}">
+              <i class="bi bi-clock-history"></i> Rents
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'rents' %}">
-              <i class="bi bi-clock-history"></i> Rents
+            <a class="nav-link" href="{% url 'profile' %}">
+              <i class="bi bi-person-circle"></i> {{ user.last_name }}
             </a>
           </li>
         {% else %}

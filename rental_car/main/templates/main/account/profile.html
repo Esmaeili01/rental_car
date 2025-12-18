@@ -1,0 +1,58 @@
+{% extends "main/profile_base.html" %}
+{% block title %}Profile - Car Rental{% endblock %}
+
+{% block profile_content %}
+
+<div class="card shadow-sm">
+  <div class="card-header bg-dark text-white">
+    <h5 class="mb-0">Profile Information</h5>
+  </div>
+
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">First Name</p>
+        <p class="fw-semibold">{{ user.first_name }}</p>
+      </div>
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">Last Name</p>
+        <p class="fw-semibold">{{ user.last_name }}</p>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">Email</p>
+        <p class="fw-semibold">{{ user.email }}</p>
+      </div>
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">Phone</p>
+        <p class="fw-semibold">{{ user.phone }}</p>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">Birthdate</p>
+        <p class="fw-semibold">{{ user.birthdate }}</p>
+      </div>
+      <div class="col-md-6">
+        <p class="mb-1 text-muted">Role</p>
+        <span class="badge bg-primary">{{ user.role|title }}</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <p class="mb-1 text-muted">Address</p>
+      <p class="fw-semibold">{{ user.address }}</p>
+    </div>
+
+    <div class="mb-4">
+      <p class="mb-1 text-muted">Joined</p>
+      <p class="fw-semibold">{{ user.date_joined|date:"Y-m-d" }}</p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

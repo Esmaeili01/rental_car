@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "main/includes/base.html" %}
 
 {% block title %}{{ car.brand }} {{ car.model }}{% endblock %}
 
@@ -6,63 +6,77 @@
 
 <div class="container mt-4">
 
-    <!-- Car heading -->
-    <h2>{{ car.brand }} {{ car.model }}</h2>
-    <hr>
+  <h2 class="mb-3">{{ car.brand }} {{ car.model }}</h2>
+  <hr>
 
-    <div class="row mt-3">
+  <div class="row">
 
-        <!-- LEFT: Car Image -->
-        <div class="col-md-6">
-            <img src="{{ car.image_url }}" alt="{{ car.brand }}" class="img-fluid rounded">
-        </div>
+    <!-- LEFT: Image + Details -->
+    <div class="col-md-6">
 
-        <!-- RIGHT: Car Details -->
-        <div class="col-md-6">
-            <h4>Car Details</h4>
-            <ul class="list-group mb-4">
+      <!-- Car Image -->
+      <img
+        src="{{ car.image_url }}"
+        alt="{{ car.brand }}"
+        class="img-fluid rounded mb-3"
+      >
 
-                <li class="list-group-item"><strong>Brand:</strong> {{ car.brand }}</li>
-                <li class="list-group-item"><strong>Model:</strong> {{ car.model }}</li>
-                <li class="list-group-item"><strong>Year:</strong> {{ car.production_year }}</li>
-                <li class="list-group-item"><strong>Color:</strong> {{ car.color }}</li>
-                <li class="list-group-item"><strong>Seats:</strong> {{ car.seats }}</li>
-                <li class="list-group-item"><strong>Fuel:</strong> {{ car.fuel }}</li>
-                <li class="list-group-item"><strong>Gearbox:</strong> {{ car.gearbox }}</li>
-                <li class="list-group-item"><strong>City:</strong> {{ car.city }}</li>
-                <li class="list-group-item"><strong>Country:</strong> {{ car.country }}</li>
-                <li class="list-group-item"><strong>Description:</strong> {{ car.description }}</li>
+      <!-- Car Details -->
+      <h4>Car Details</h4>
+      <ul class="list-group">
 
-            </ul>
+        <li class="list-group-item"><strong>Brand:</strong> {{ car.brand }}</li>
+        <li class="list-group-item"><strong>Model:</strong> {{ car.model }}</li>
+        <li class="list-group-item"><strong>Year:</strong> {{ car.production_year }}</li>
+        <li class="list-group-item"><strong>Color:</strong> {{ car.color|default:"—" }}</li>
+        <li class="list-group-item"><strong>Seats:</strong> {{ car.seats|default:"—" }}</li>
+        <li class="list-group-item"><strong>Fuel:</strong> {{ car.fuel|default:"—" }}</li>
+        <li class="list-group-item"><strong>Gearbox:</strong> {{ car.gearbox|default:"—" }}</li>
+        <li class="list-group-item"><strong>City:</strong> {{ car.city|default:"—" }}</li>
+        <li class="list-group-item"><strong>Country:</strong> {{ car.country|default:"—" }}</li>
+        <li class="list-group-item"><strong>Description:</strong> {{ car.description|default:"—" }}</li>
 
-            <!-- Rent Section -->
-            <h4>Rent This Car</h4>
-
-            {% if user.is_authenticated %}
-                {% if car.with_driver %}
-                    <p class="text-muted">Driver included.</p>
-                {% endif %}
-
-                <form method="POST" action="{% url 'rent_car' car.car_id %}">
-                    {% csrf_token %}
-
-                    <label class="form-label">Select Start Date:</label>
-                    <input type="date" name="start_date" class="form-control mb-2" required>
-
-                    <label class="form-label">Select End Date:</label>
-                    <input type="date" name="end_date" class="form-control mb-3" required>
-
-                    <button class="btn btn-success w-100">Rent for ${{ car.fee }} per day</button>
-                </form>
-            
-            {% else %}
-                <p class="text-danger mt-3"><strong>You must be logged in to rent a car.</strong></p>
-                <a href="{% url 'login' %}" class="btn btn-primary w-100">Login</a>
-            {% endif %}
-
-        </div>
+      </ul>
 
     </div>
+
+    <!-- RIGHT: Rent Section -->
+    <div class="col-md-6">
+
+      <h4>Rent This Car</h4>
+
+      {% if user.is_authenticated %}
+
+        {% if car.with_driver %}
+          <p class="text-muted">Driver included.</p>
+        {% endif %}
+
+        <form method="POST" action="{% url 'rent_car' car.car_id %}">
+          {% csrf_token %}
+
+          <label class="form-label">Start Date</label>
+          <input type="date" name="start_date" class="form-control mb-2" required>
+
+          <label class="form-label">End Date</label>
+          <input type="date" name="end_date" class="form-control mb-3" required>
+
+          <button class="btn btn-success w-100">
+            Rent for ${{ car.fee }} per day
+          </button>
+        </form>
+
+      {% else %}
+
+        <p class="text-danger mt-3">
+          <strong>You must be logged in to rent this car.</strong>
+        </p>
+        <a href="{% url 'login' %}" class="btn btn-primary w-100">Login</a>
+
+      {% endif %}
+
+    </div>
+
+  </div>
 
 </div>
 
