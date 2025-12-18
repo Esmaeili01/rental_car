@@ -64,18 +64,19 @@
     <h2 class="mb-4">Available Cars</h2>
     <div class="row">
       {% for car in cars %}
-      <div class="col-md-4 mb-3">
-        <div class="card">
-          <img src="{{ car.image_url }}" class="card-img-top" alt="{{ car.brand }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-            <p class="card-text">${{ car.fee }} / day</p>
-            <a href="{% url 'car' car.car_id %}" class="btn btn-primary">View</a>
-          </div>
+        <div class="col-md-4 mb-3">
+          <a href="{% url 'car' car.car_id %}" class="btn">
+            <div class="card h-100">
+              <img src="{{ car.image_url }}" class="card-img-top" alt="{{ car.brand }}">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                <p class="mb-2">${{ car.fee }} / day</p>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
       {% empty %}
-      <p>No cars available right now.</p>
+        <p>No cars available right now.</p>
       {% endfor %}
     </div>
   </div>
