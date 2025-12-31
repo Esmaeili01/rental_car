@@ -9,40 +9,20 @@
   <h2 class="mb-3">{{ car.brand }} {{ car.model }}</h2>
   <hr>
 
+  <!-- TOP ROW -->
   <div class="row">
 
-    <!-- LEFT: Image + Details -->
+    <!-- LEFT: Image -->
     <div class="col-md-6">
-
-      <!-- Car Image -->
       <img
         src="{{ car.image_url }}"
         alt="{{ car.brand }}"
-        class="img-fluid rounded mb-3"
+        class="img-fluid rounded"
       >
-
-      <!-- Car Details -->
-      <h4>Car Details</h4>
-      <ul class="list-group">
-
-        <li class="list-group-item"><strong>Brand:</strong> {{ car.brand }}</li>
-        <li class="list-group-item"><strong>Model:</strong> {{ car.model }}</li>
-        <li class="list-group-item"><strong>Year:</strong> {{ car.production_year }}</li>
-        <li class="list-group-item"><strong>Color:</strong> {{ car.color|default:"—" }}</li>
-        <li class="list-group-item"><strong>Seats:</strong> {{ car.seats|default:"—" }}</li>
-        <li class="list-group-item"><strong>Fuel:</strong> {{ car.fuel|default:"—" }}</li>
-        <li class="list-group-item"><strong>Gearbox:</strong> {{ car.gearbox|default:"—" }}</li>
-        <li class="list-group-item"><strong>City:</strong> {{ car.city|default:"—" }}</li>
-        <li class="list-group-item"><strong>Country:</strong> {{ car.country|default:"—" }}</li>
-        <li class="list-group-item"><strong>Description:</strong> {{ car.description|default:"—" }}</li>
-
-      </ul>
-
     </div>
 
     <!-- RIGHT: Rent Section -->
     <div class="col-md-6">
-
       <h4>Rent This Car</h4>
 
       {% if user.is_authenticated %}
@@ -66,18 +46,71 @@
         </form>
 
       {% else %}
-
         <p class="text-danger mt-3">
           <strong>You must be logged in to rent this car.</strong>
         </p>
         <a href="{% url 'login' %}" class="btn btn-primary w-100">Login</a>
-
       {% endif %}
-
     </div>
 
   </div>
 
+  <!-- SPECIFICATIONS (UNDER IMAGE) -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+
+        <h4 class="mb-3">Specifications</h4>
+
+        <div class="border rounded p-3 bg-light">
+          	<table class="table table-borderless table-sm mb-0">
+            	<tbody>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Brand</td>
+            		  <td>{{ car.brand }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Model</td>
+            		  <td>{{ car.model }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Year</td>
+            		  <td>{{ car.production_year }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Color</td>
+            		  <td>{{ car.color|default:"—" }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Seats</td>
+            		  <td>{{ car.seats|default:"—" }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Fuel</td>
+            		  <td>{{ car.fuel|default:"—" }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Gearbox</td>
+            		  <td>{{ car.gearbox|default:"—" }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">City</td>
+            		  <td>{{ car.city|default:"—" }}</td>
+            		</tr>
+            		<tr>
+            		  <td class="text-muted fw-semibold">Country</td>
+            		  <td>{{ car.country|default:"—" }}</td>
+            		</tr>
+				
+            		{% if car.description %}
+            		<tr class="border-top">
+            		  <td class="text-muted fw-semibold align-top">Description</td>
+            		  <td>{{ car.description }}</td>
+            		</tr>
+            		{% endif %}
+            	</tbody>
+          	</table>
+  		</div>
+	</div>
 </div>
 
 {% endblock %}

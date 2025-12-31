@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm , CarForm
 from .models import User, Login , Car
+from django.utils import timezone
 
 
 def home_view(request):
@@ -86,8 +87,7 @@ def car_view(request, car_id):
     car = Car.objects.get(pk=car_id)
     return render(request, 'main/car.html', {'car': car})
 
-from django.utils import timezone
-from .models import Rent, Car
+
 
 def rent_car_view(request, car_id):
     if not request.user.is_authenticated:
